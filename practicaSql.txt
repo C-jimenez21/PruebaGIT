@@ -1,0 +1,59 @@
+
+mysql -u campus -p
+
+show databases;
+
+create database informacion;
+
+use informacion;
+
+create table usuario(
+    -> id int not null,
+    -> nombre varchar(255) not null,
+    -> apellido varchar(255));
+
+describe usuario;
+
+alter table usuario add constraint pk_cedula primary key(id);
+
+alter table usuario add column email varchar(100) not null;
+
+alter table usuario add constraint UC_correo unique(email);
+
+INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3, ...)
+VALUES (valor1, valor2, valor3, ...);
+
+UPDATE nombre_de_la_tabla
+SET columna1 = valor1, columna2 = valor2, ...
+WHERE condicion;
+
+
+DELETE FROM nombre_de_la_tabla; TRUNCATE TABLE nombre_de_la_tabla; 
+
+SELECT nombre_de_los_campos
+FROM nombre_de_las_tablas
+WHERE condición
+ORDER BY especificacion_de_ordenacion
+LIMIT límite_registros_devueltos
+
+
+select * from usuario where nombre like "j%";
+
+
+// solo deja los inserts
+mysqldump -u campus -p --no-create-info informacion > dbInsert.sql
+
+// solo deja los creates
+mysqldump -u campus -p --no-data informacion > dbInformacion.sql
+
+// se deben borrar los drops primero
+mysql -u campus -p informacion < dbInformacion.sql
+mysql -u campus -p informacion < dbInsert.sql
+
+
+
+git init
+git add .
+git commit -m "comit"
+git remote add origin https://github.com/davidRamirez1005/ejemploGit.git
+git push -u origin main -f
